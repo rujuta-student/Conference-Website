@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Schedule - NovaSphere</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .schedule-container {
+      padding: 80px 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff5e00;
+      margin-bottom: 40px;
+    }
+
+    /* DAY ROW */
+    .day-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      margin-bottom: 30px;
+    }
+
+    .day-btn {
+      min-width: 130px;
+      padding: 12px;
+      background: #111;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #222;
+      transition: 0.3s;
+    }
+
+    .day-btn.active { background: #ff5e00; box-shadow: 0 0 15px rgba(255,94,0,0.6); }
+
+    /* ROOM ROW */
+    .room-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .room-btn {
+      padding: 10px 20px;
+      background: #111;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid #222;
+      transition: 0.3s;
+    }
+
+    .room-btn.active { background: #ff5e00; }
+
+    /* EVENT CARDS - VERTICAL STACK */
+    .event-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .event-card {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid #222;
+      transition: 0.3s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border: 1px solid #ff5e00;
+      box-shadow: 0 0 25px rgba(255,94,0,0.6);
+    }
+
+    .time { color: #ff5e00; font-weight: bold; margin-bottom: 8px; }
+    .title { font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; }
+    .event-card p { color: #aaa; font-size: 0.9rem; margin: 4px 0; }
+    .tag { display: inline-block; margin-top: 10px; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; background: #ff5e00; box-shadow: 0 0 10px rgba(255,94,0,0.5); }
+
+    /* Optional scrollbar styling */
+    .event-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .event-container::-webkit-scrollbar-thumb {
+      background: #ff5e00;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-left" onclick="window.location.href='index.html'">
+    <h2 class="logo">NovaSphere</h2>
+    <span class="event-info">April 1–5 • Chennai</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="schedule.html">Schedule</a>
+  </div>
+</nav>
+
+<section class="schedule-container">
+  <h1>Conference Schedule</h1>
+  <div class="day-row" id="days"></div>
+  <div class="room-row" id="rooms"></div>
+  <div class="event-container" id="events"></div>
+</section>
+
+<script>
+const data = {
+  "Day 1": {
+    "Hall A": [
+      {time:"10-11 AM", title:"Sustainable Code", speaker:"Sara", chair:"Sanjay", type:"Conference"},
+      {time:"11-12 PM", title:"AI Workshop", speaker:"Ravi", chair:"Meena", type:"Workshop"},
+      {time:"12-1 PM", title:"Project Expo", speaker:"Team A", chair:"Prof. Raj", type:"Exhibition"},
+      {time:"1-2 PM", title:"Design Contest", speaker:"Group 1", chair:"Anu", type:"Contest"},
+      {time:"2-3 PM", title:"Panel Discussion", speaker:"Experts", chair:"Nina", type:"Conference"}
+    ],
+    "Hall B": [
+      {time:"10-11 AM", title:"Robotics Intro", speaker:"Leo", chair:"Sam", type:"Conference"},
+      {time:"11-12 PM", title:"IoT Research", speaker:"Ava", chair:"John", type:"Research"},
+      {time:"12-1 PM", title:"Cybersecurity Workshop", speaker:"Tom", chair:"Sara", type:"Workshop"},
+      {time:"1-2 PM", title:"Hackathon Prep", speaker:"Team X", chair:"Mike", type:"Workshop"},
+      {time:"2-3 PM", title:"Tech Panel", speaker:"Experts", chair:"Raj", type:"Conference"}
+    ],
+    "Room 1": [
+      {time:"10-11 AM", title:"ML Fundamentals", speaker:"Ankit", chair:"Neha", type:"Workshop"},
+      {time:"11-12 PM", title:"Deep Learning Research", speaker:"Sara", chair:"Raj", type:"Research"},
+      {time:"12-1 PM", title:"Data Science Contest", speaker:"Students", chair:"Prof. Dev", type:"Contest"},
+      {time:"1-2 PM", title:"Python Lab", speaker:"Dev", chair:"Rohit", type:"Workshop"},
+      {time:"2-3 PM", title:"AI Expo", speaker:"Maya", chair:"Sanjay", type:"Exhibition"}
+    ],
+    "Room 2": [
+      {time:"10-11 AM", title:"UI/UX Intro", speaker:"Lena", chair:"Ravi", type:"Workshop"},
+      {time:"11-12 PM", title:"Frontend Design Contest", speaker:"Team B", chair:"Anu", type:"Contest"},
+      {time:"12-1 PM", title:"React Workshop", speaker:"Jay", chair:"Amit", type:"Workshop"},
+      {time:"1-2 PM", title:"Portfolio Exhibition", speaker:"Students", chair:"Prof. Kiran", type:"Exhibition"},
+      {time:"2-3 PM", title:"Tech Talk", speaker:"Zara", chair:"Mike", type:"Conference"}
+    ]
+  },
+  "Day 2": {
+    "Hall A": [
+      {time:"10-11 AM", title:"Quantum Tech Conference", speaker:"Ishaan", chair:"Dev", type:"Conference"},
+      {time:"11-12 PM", title:"AI Research Presentations", speaker:"Multiple", chair:"Kunal", type:"Research"},
+      {time:"12-1 PM", title:"Green Tech Expo", speaker:"Students", chair:"Priya", type:"Exhibition"},
+      {time:"1-2 PM", title:"Design Sprint", speaker:"Team A", chair:"Anu", type:"Contest"},
+      {time:"2-3 PM", title:"Startup Pitches", speaker:"Founders", chair:"Rahul", type:"Pitch"}
+    ],
+    "Hall B": [
+      {time:"10-11 AM", title:"5G Networks", speaker:"Tom", chair:"Sam", type:"Conference"},
+      {time:"11-12 PM", title:"IoT Innovations", speaker:"Ali", chair:"Riya", type:"Research"},
+      {time:"12-1 PM", title:"Robotics Expo", speaker:"Leo", chair:"John", type:"Exhibition"},
+      {time:"1-2 PM", title:"Hackathon", speaker:"Team X", chair:"Mike", type:"Contest"},
+      {time:"2-3 PM", title:"Tech Panel", speaker:"Experts", chair:"Sara", type:"Conference"}
+    ],
+    "Room 1": [
+      {time:"10-11 AM", title:"ML Advanced", speaker:"Ankit", chair:"Neha", type:"Workshop"},
+      {time:"11-12 PM", title:"Deep Learning Research", speaker:"Sara", chair:"Raj", type:"Research"},
+      {time:"12-1 PM", title:"Data Science Contest", speaker:"Students", chair:"Prof. Dev", type:"Contest"},
+      {time:"1-2 PM", title:"Python Workshop", speaker:"Dev", chair:"Rohit", type:"Workshop"},
+      {time:"2-3 PM", title:"AI Exhibition", speaker:"Maya", chair:"Sanjay", type:"Exhibition"}
+    ],
+    "Room 2": [
+      {time:"10-11 AM", title:"UX Research", speaker:"Lena", chair:"Ravi", type:"Workshop"},
+      {time:"11-12 PM", title:"Design Contest", speaker:"Team B", chair:"Anu", type:"Contest"},
+      {time:"12-1 PM", title:"Frontend Expo", speaker:"Students", chair:"Kiran", type:"Exhibition"},
+      {time:"1-2 PM", title:"React Workshop", speaker:"Jay", chair:"Amit", type:"Workshop"},
+      {time:"2-3 PM", title:"Tech Talk", speaker:"Zara", chair:"Mike", type:"Conference"}
+    ]
+  },
+  "Day 3": {
+    "Hall A": [
+      {time:"10-11 AM", title:"AR/VR Conference", speaker:"Isha", chair:"Neha", type:"Conference"},
+      {time:"11-12 PM", title:"AI Ethics Panel", speaker:"Experts", chair:"Ravi", type:"Conference"},
+      {time:"12-1 PM", title:"ML Hackathon", speaker:"Team C", chair:"Sanjay", type:"Contest"},
+      {time:"1-2 PM", title:"Robotics Lab", speaker:"Leo", chair:"Sam", type:"Workshop"},
+      {time:"2-3 PM", title:"Tech Expo", speaker:"Students", chair:"Prof. Dev", type:"Exhibition"}
+    ],
+    "Hall B": [
+      {time:"10-11 AM", title:"Blockchain Workshop", speaker:"Tom", chair:"Ali", type:"Workshop"},
+      {time:"11-12 PM", title:"Cybersecurity Expo", speaker:"Team D", chair:"John", type:"Exhibition"},
+      {time:"12-1 PM", title:"IoT Hackathon", speaker:"Team X", chair:"Mike", type:"Contest"},
+      {time:"1-2 PM", title:"Tech Panel Discussion", speaker:"Experts", chair:"Raj", type:"Conference"},
+      {time:"2-3 PM", title:"Startup Meetup", speaker:"Founders", chair:"Priya", type:"Pitch"}
+    ],
+    "Room 1": [
+      {time:"10-11 AM", title:"Data Visualization Lab", speaker:"Maya", chair:"Rohit", type:"Workshop"},
+      {time:"11-12 PM", title:"Python Automation", speaker:"Dev", chair:"Neha", type:"Workshop"},
+      {time:"12-1 PM", title:"AI Contest", speaker:"Students", chair:"Prof. Kiran", type:"Contest"},
+      {time:"1-2 PM", title:"ML Research Expo", speaker:"Sara", chair:"Raj", type:"Exhibition"},
+      {time:"2-3 PM", title:"Frontend Workshop", speaker:"Jay", chair:"Amit", type:"Workshop"}
+    ],
+    "Room 2": [
+      {time:"10-11 AM", title:"UI/UX Contest", speaker:"Team E", chair:"Anu", type:"Contest"},
+      {time:"11-12 PM", title:"React Expo", speaker:"Students", chair:"Kiran", type:"Exhibition"},
+      {time:"12-1 PM", title:"Python Hackathon", speaker:"Team F", chair:"Ravi", type:"Contest"},
+      {time:"1-2 PM", title:"Tech Talk", speaker:"Zara", chair:"Mike", type:"Conference"},
+      {time:"2-3 PM", title:"Design Sprint", speaker:"Group 2", chair:"Anu", type:"Contest"}
+    ]
+  },
+  "Day 4": {
+    "Hall A": [
+      {time:"10-11 AM", title:"Quantum Computing Workshop", speaker:"Ishaan", chair:"Dev", type:"Workshop"},
+      {time:"11-12 PM", title:"AI in Healthcare", speaker:"Experts", chair:"Raj", type:"Conference"},
+      {time:"12-1 PM", title:"Tech Expo", speaker:"Students", chair:"Priya", type:"Exhibition"},
+      {time:"1-2 PM", title:"ML Contest", speaker:"Team C", chair:"Neha", type:"Contest"},
+      {time:"2-3 PM", title:"Panel Discussion", speaker:"Experts", chair:"Ravi", type:"Conference"}
+    ],
+    "Hall B": [
+      {time:"10-11 AM", title:"Blockchain Expo", speaker:"Team D", chair:"John", type:"Exhibition"},
+      {time:"11-12 PM", title:"IoT Workshop", speaker:"Ali", chair:"Sara", type:"Workshop"},
+      {time:"12-1 PM", title:"Hackathon Prep", speaker:"Team X", chair:"Mike", type:"Contest"},
+      {time:"1-2 PM", title:"Tech Panel", speaker:"Experts", chair:"Raj", type:"Conference"},
+      {time:"2-3 PM", title:"Startup Pitch", speaker:"Founders", chair:"Priya", type:"Pitch"}
+    ],
+    "Room 1": [
+      {time:"10-11 AM", title:"Python Lab", speaker:"Dev", chair:"Rohit", type:"Workshop"},
+      {time:"11-12 PM", title:"ML Research", speaker:"Sara", chair:"Raj", type:"Research"},
+      {time:"12-1 PM", title:"AI Contest", speaker:"Students", chair:"Prof. Kiran", type:"Contest"},
+      {time:"1-2 PM", title:"Data Science Expo", speaker:"Maya", chair:"Sanjay", type:"Exhibition"},
+      {time:"2-3 PM", title:"Frontend Workshop", speaker:"Jay", chair:"Amit", type:"Workshop"}
+    ],
+    "Room 2": [
+      {time:"10-11 AM", title:"UI/UX Workshop", speaker:"Lena", chair:"Ravi", type:"Workshop"},
+      {time:"11-12 PM", title:"Design Contest", speaker:"Team B", chair:"Anu", type:"Contest"},
+      {time:"12-1 PM", title:"React Expo", speaker:"Students", chair:"Kiran", type:"Exhibition"},
+      {time:"1-2 PM", title:"Tech Talk", speaker:"Zara", chair:"Mike", type:"Conference"},
+      {time:"2-3 PM", title:"Portfolio Showcase", speaker:"Students", chair:"Prof. Dev", type:"Exhibition"}
+    ]
+  },
+  "Day 5": {
+    "Hall A": [
+      {time:"10-11 AM", title:"Future of AI", speaker:"Experts", chair:"Raj", type:"Conference"},
+      {time:"11-12 PM", title:"ML Panel", speaker:"Experts", chair:"Ravi", type:"Conference"},
+      {time:"12-1 PM", title:"Project Expo", speaker:"Students", chair:"Prof. Kiran", type:"Exhibition"},
+      {time:"1-2 PM", title:"Hackathon Final", speaker:"Team X", chair:"Mike", type:"Contest"},
+      {time:"2-3 PM", title:"Closing Remarks", speaker:"Organizers", chair:"Priya", type:"Conference"}
+    ],
+    "Hall B": [
+      {time:"10-11 AM", title:"IoT Panel", speaker:"Experts", chair:"Sara", type:"Conference"},
+      {time:"11-12 PM", title:"Blockchain Workshop", speaker:"Team D", chair:"John", type:"Workshop"},
+      {time:"12-1 PM", title:"Cybersecurity Expo", speaker:"Team B", chair:"Riya", type:"Exhibition"},
+      {time:"1-2 PM", title:"Design Contest", speaker:"Team C", chair:"Anu", type:"Contest"},
+      {time:"2-3 PM", title:"Tech Panel", speaker:"Experts", chair:"Raj", type:"Conference"}
+    ],
+    "Room 1": [
+      {time:"10-11 AM", title:"ML Lab", speaker:"Ankit", chair:"Neha", type:"Workshop"},
+      {time:"11-12 PM", title:"Python Workshop", speaker:"Dev", chair:"Rohit", type:"Workshop"},
+      {time:"12-1 PM", title:"AI Contest", speaker:"Students", chair:"Prof. Dev", type:"Contest"},
+      {time:"1-2 PM", title:"Data Science Expo", speaker:"Maya", chair:"Sanjay", type:"Exhibition"},
+      {time:"2-3 PM", title:"Frontend Lab", speaker:"Jay", chair:"Amit", type:"Workshop"}
+    ],
+    "Room 2": [
+      {time:"10-11 AM", title:"UI/UX Workshop", speaker:"Lena", chair:"Ravi", type:"Workshop"},
+      {time:"11-12 PM", title:"React Contest", speaker:"Team B", chair:"Anu", type:"Contest"},
+      {time:"12-1 PM", title:"Portfolio Expo", speaker:"Students", chair:"Kiran", type:"Exhibition"},
+      {time:"1-2 PM", title:"Tech Talk", speaker:"Zara", chair:"Mike", type:"Conference"},
+      {time:"2-3 PM", title:"Closing Panel", speaker:"Experts", chair:"Raj", type:"Conference"}
+    ]
+  }
+};
+
+// INIT
+const daysDiv = document.getElementById("days");
+const roomsDiv = document.getElementById("rooms");
+const eventsDiv = document.getElementById("events");
+
+Object.keys(data).forEach((day, index) => {
+  let btn = document.createElement("div");
+  btn.className = "day-btn";
+  btn.innerText = day;
+  btn.onclick = () => selectDay(day, btn);
+  if(index===0) { btn.classList.add("active"); selectDay(day, btn); }
+  daysDiv.appendChild(btn);
+});
+
+function selectDay(day, element){
+  document.querySelectorAll(".day-btn").forEach(b=>b.classList.remove("active"));
+  element.classList.add("active");
+  roomsDiv.innerHTML="";
+  Object.keys(data[day]).forEach((room,index)=>{
+    let btn = document.createElement("div");
+    btn.className="room-btn";
+    btn.innerText=room;
+    btn.onclick=()=>selectRoom(day,room,btn);
+    if(index===0){ btn.classList.add("active"); selectRoom(day,room,btn); }
+    roomsDiv.appendChild(btn);
+  });
+}
+
+function selectRoom(day,room,element){
+  document.querySelectorAll(".room-btn").forEach(b=>b.classList.remove("active"));
+  element.classList.add("active");
+  eventsDiv.innerHTML="";
+  data[day][room].forEach(event=>{
+    let card=document.createElement("div");
+    card.className="event-card";
+    card.innerHTML=`
+      <div class="time">${event.time}</div>
+      <div class="title">${event.title}</div>
+      <p><strong>Speaker:</strong> ${event.speaker}</p>
+      <p><strong>Chair:</strong> ${event.chair}</p>
+      <span class="tag">${event.type}</span>
+    `;
+    eventsDiv.appendChild(card);
+  });
+}
+</script>
+<!-- Open in a new tab -->
+<div style="text-align:center; margin:40px 0;">
+  <a href="http://localhost:3000" target="_blank">
+    <button style="padding:12px 25px; background:#ff7f50; color:#fff; border:none; border-radius:10px; cursor:pointer;">
+      Personal Schedule Generator
+    </button>
+  </a>
+</div>
+
+</body>
+</html>

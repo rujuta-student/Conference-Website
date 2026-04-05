@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - NovaSphere</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* 🔥 FULL WIDTH CARD LAYOUT */
+    .pricing {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .price-card {
+      flex: 1;
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.4s;
+      border: 1px solid #222;
+      cursor: pointer;
+    }
+
+    .price-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255,94,0,0.6);
+      border: 1px solid #ff5e00;
+    }
+
+    .price-card h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .price-card h3 {
+      color: #ff5e00;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .price-card li {
+      margin: 10px 0;
+      color: #ccc;
+    }
+
+    .price-card button {
+      padding: 12px 25px;
+      background: #ff5e00;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* 🔥 MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 25px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 8px;
+    }
+
+    .modal-content label {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-left" onclick="window.location.href='index.html'">
+    <h2 class="logo">NovaSphere</h2>
+    <span class="event-info">April 1–2 • Chennai</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="schedule.html">Schedule</a>
+  </div>
+</nav>
+
+<section class="register">
+
+  <h1>Choose Your Pass</h1>
+
+  <!-- 🔥 BIG CARDS -->
+  <div class="pricing">
+
+    <div class="price-card">
+      <h2>Student</h2>
+      <h3>$49</h3>
+      <ul>
+        <li>Meals included</li>
+        <li>Tutorial workshops</li>
+        <li>Networking access</li>
+      </ul>
+      <button onclick="openForm('Student Pass')">Register</button>
+    </div>
+
+    <div class="price-card">
+      <h2>Professor</h2>
+      <h3>$79</h3>
+      <ul>
+        <li>Meals included</li>
+        <li>Advanced workshops</li>
+        <li>Speaker sessions</li>
+      </ul>
+      <button onclick="openForm('Professor Pass')">Register</button>
+    </div>
+
+    <div class="price-card">
+      <h2>Professional</h2>
+      <h3>$129</h3>
+      <ul>
+        <li>Company networking</li>
+        <li>Business meetups</li>
+        <li>Expo access</li>
+      </ul>
+      <button onclick="openForm('Professional Pass')">Register</button>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="modal" id="formModal">
+
+  <div class="modal-content">
+
+    <span class="close-btn" onclick="closeForm()">×</span>
+
+    <h2>Complete Registration</h2>
+    <p id="packageDisplay"></p>
+
+    <form class="modern-form" onsubmit="return validateForm()">
+
+      <input type="hidden" id="selectedPackage">
+
+      <!-- PERSONAL -->
+      <div class="form-section">
+        <h3>Personal Info</h3>
+
+        <div class="form-row">
+          <input type="text" id="name" placeholder="Full Name" required>
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+
+        <div class="form-row">
+          <input type="tel" placeholder="Phone Number" required>
+          <input type="date" required>
+        </div>
+      </div>
+
+      <!-- DETAILS -->
+      <div class="form-section">
+        <h3>Details</h3>
+
+        <label>Gender</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender"> Male</label>
+          <label><input type="radio" name="gender"> Female</label>
+          <label><input type="radio" name="gender"> Other</label>
+        </div>
+
+        <label>Experience Level</label>
+        <select>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+      </div>
+
+      <!-- INTERESTS -->
+      <div class="form-section">
+        <h3>Interests</h3>
+
+        <div class="checkbox-grid">
+          <label><input type="checkbox"> AI/ML</label>
+          <label><input type="checkbox"> Cybersecurity</label>
+          <label><input type="checkbox"> Web3</label>
+          <label><input type="checkbox"> Robotics</label>
+        </div>
+      </div>
+
+      <!-- EXTRA -->
+      <div class="form-section">
+        <h3>Extras</h3>
+
+        <input type="file">
+        <textarea placeholder="Why do you want to attend?"></textarea>
+
+        <label class="terms">
+          <input type="checkbox" required> I agree to terms & conditions
+        </label>
+      </div>
+
+      <button class="btn submit-btn">Submit Registration</button>
+
+    </form>
+
+  </div>
+</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <h3>NovaSphere</h3>
+      <p>April 1–2, 2026</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 🔥 SCRIPT -->
+<script>
+function openForm(type) {
+  document.getElementById("formModal").style.display = "flex";
+  document.getElementById("selectedPackage").value = type;
+}
+
+function closeForm() {
+  document.getElementById("formModal").style.display = "none";
+}
+
+function validateForm() {
+  let name = document.getElementById("name").value;
+
+  if (name.length < 3) {
+    alert("Enter valid name");
+    return false;
+  }
+
+  alert("Registered Successfully 🎉");
+  closeForm();
+  return false;
+}
+</script>
+
+</body>
+</html>
