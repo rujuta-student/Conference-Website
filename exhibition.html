@@ -1,133 +1,90 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Virtual Exhibition</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: #f4f4f4;
-    }
-
-    .hall {
-      position: relative;
-      width: 700px;
-      margin: auto;
-    }
-
-    .hall img {
-      width: 100%;
-    }
-
-    .stall {
-      position: absolute;
-      cursor: pointer;
-    }
-
-    .stall:hover {
-      border: 2px solid red;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      width: 300px;
-      box-shadow: 0 0 10px gray;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      top: 0;
-      left: 0;
-    }
-  </style>
+  <title>Virtual Exhibition - NovaSphere</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>🔬 Virtual Science Exhibition</h1>
+  <nav class="navbar">
 
-<div class="hall">
-  <img src="https://i.imgur.com/7bKQ8Kf.jpg">
+    <!-- LEFT -->
+    <div class="nav-left" onclick="window.location.href='index.html'">
+      <h2 class="logo">NovaSphere</h2>
+      <span class="event-info">Apr 11-15 • Chennai</span>
+    </div>
 
-  <div class="stall" style="top:50px; left:100px; width:100px; height:100px;"
-       onclick="openPopup('AI Project')"></div>
+    <!-- CENTER -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="exhibition.html">Go to Virtual Exhibition</a>
+      <a href="index.html#sponsors">Sponsors</a>
+    </div>
 
-  <div class="stall" style="top:200px; left:300px; width:100px; height:100px;"
-       onclick="openPopup('Robotics')"></div>
-</div>
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <a href="register.html" class="ticket-btn">REGISTER</a>
+    </div>
 
-<div class="overlay" id="overlay"></div>
+  </nav>
 
-<div class="popup" id="popup">
-  <h2 id="title"></h2>
+  <section class="about-hero" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div class="about-text">
+      <h1 style="color: #ff5e00; font-size: 3rem;">Virtual Exhibition</h1>
+      <p style="font-size: 1.2rem;">Coming soon. Join us on April 5–6 to explore fully interactive 3D virtual booths from our global sponsors.</p>
+    <br>
+    <br>
+        <a href="http://localhost:3000/exhibition" target="_blank" style="
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #000;
+        color: #FF8C00;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 10px;
+        border: 2px solid #FF8C00;
+        border-radius: 50px;
+        box-shadow: 0 0 30px rgba(255, 140, 0, 0.7);
+        transition: 0.3s;
+    ">
+        EXPLORE VIRTUAL EXHIBITION
+    </a>
 
-  <input id="msg" placeholder="Ask something">
-  <button onclick="sendMessage()">Send</button>
 
-  <ul id="chat"></ul>
+    
+    
+    </div>
+  </section>
 
-  <button onclick="closePopup()">Close</button>
-</div>
+  <footer class="footer">
 
-<script>
-let currentStall = "";
+    <div class="footer-container">
 
-function openPopup(name) {
-  currentStall = name;
-  document.getElementById("title").innerText = name;
+      <!-- LEFT -->
+      <div class="footer-left">
+        <h3>NovaSphere • Chennai</h3>
+        <p>Apr 11-15, 2026</p>
+      </div>
 
-  document.getElementById("popup").style.display = "block";
-  document.getElementById("overlay").style.display = "block";
+      <!-- CENTER (CONTACT INFO) -->
+      <div class="footer-center">
+        <p><strong>Email:</strong> info@novasphere.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
 
-  loadMessages();
-}
+      <!-- RIGHT (LINKS) -->
+      <div class="footer-right">
+        <a href="index.html#venue">Venue</a>
+        <a href="about.html">About</a>
+        <a href="sponsor.html">Sponsors</a>
+      </div>
 
-function closePopup() {
-  document.getElementById("popup").style.display = "none";
-  document.getElementById("overlay").style.display = "none";
-}
+    </div>
 
-function sendMessage() {
-  let msg = document.getElementById("msg").value;
-
-  fetch("http://localhost:3000/message", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text: msg, stall: currentStall })
-  }).then(() => {
-    document.getElementById("msg").value = "";
-    loadMessages();
-  });
-}
-
-function loadMessages() {
-  fetch("http://localhost:3000/messages")
-    .then(res => res.json())
-    .then(data => {
-      let chat = document.getElementById("chat");
-      chat.innerHTML = "";
-
-      data
-        .filter(m => m.stall === currentStall)
-        .forEach(m => {
-          chat.innerHTML += `<li>${m.text}</li>`;
-        });
-    });
-}
-</script>
+  </footer>
 
 </body>
 </html>
