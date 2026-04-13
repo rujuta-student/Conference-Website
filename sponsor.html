@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sponsor Us - NovaSphere</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+
+    <!-- LEFT -->
+    <div class="nav-left" onclick="window.location.href='index.html'">
+      <h2 class="logo">NovaSphere</h2>
+      <span class="event-info">Apr 11-15 • Chennai</span>
+    </div>
+
+    <!-- CENTER -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="exhibition.html">Go to Virtual Exhibition</a>
+      <a href="index.html#sponsors">Sponsors</a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <a href="register.html" class="ticket-btn">REGISTER</a>
+    </div>
+
+  </nav>
+
+  <!-- FORM SECTION -->
+  <section class="register" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <h1 style="color: #ff5e00; margin-bottom: 10px;">Become a Sponsor</h1>
+    <p style="color: #aaa; margin-bottom: 40px;">Partner with India's fastest-growing tech summit.</p>
+
+    <div style="background: #111; padding: 40px; border-radius: 15px; width: 500px; max-width: 90vw; border: 1px solid #333;">
+      <form class="modern-form" onsubmit="return validateSponsorForm(event)">
+        
+        <input type="text" id="spName" placeholder="Full Name" required>
+        <input type="email" id="spEmail" placeholder="Work Email" required>
+        <input type="text" id="spCompany" placeholder="Company Name" required>
+        
+        <label style="margin-top: 15px; display: block; text-align: left;">Select Sponsorship Tier</label>
+        <select required>
+          <option value="">-- Select an option --</option>
+          <option>Platinum Sponsor</option>
+          <option>Gold Sponsor</option>
+          <option>Silver Sponsor</option>
+          <option>Exhibitor</option>
+        </select>
+
+        <textarea placeholder="Tell us more about your sponsorship goals" rows="4"></textarea>
+
+        <button type="submit" class="submit-btn" style="margin-top: 25px;">Submit Interest</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <!-- LEFT -->
+      <div class="footer-left">
+        <h3>NovaSphere • Chennai</h3>
+        <p>Apr 11-15, 2026</p>
+      </div>
+
+      <!-- CENTER (CONTACT INFO) -->
+      <div class="footer-center">
+        <p><strong>Email:</strong> info@novasphere.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
+
+      <!-- RIGHT (LINKS) -->
+      <div class="footer-right">
+        <a href="index.html#venue">Venue</a>
+        <a href="about.html">About</a>
+        <a href="sponsor.html">Sponsors</a>
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script>
+    function validateSponsorForm(e) {
+      e.preventDefault();
+      alert("Thank you for your interest! Our sponsorship team will reach out to you shortly.");
+      document.querySelector('form').reset();
+      return false;
+    }
+  </script>
+
+</body>
+</html>
