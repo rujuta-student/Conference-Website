@@ -1,75 +1,138 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>About - NovaSphere</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<script src="script.js"></script>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-left" onclick="window.location.href='index.html'">
-    <h2 class="logo">NovaSphere</h2>
-    <span class="event-info">April 1–2 • Chennai</span>
-  </div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
 
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="schedule.html">Schedule</a>
-    <a href="index.html#sponsors">Sponsors</a>
-  </div>
-
-  <div class="nav-right">
-    <a href="register.html" class="ticket-btn">REGISTER</a>
-  </div>
-</nav>
-
-<!-- ABOUT -->
-<section class="about">
-  <div class="about-container">
-    <h1>About NovaSphere</h1>
-
-    <p>
-      NovaSphere is a next-generation tech summit bringing together developers,
-      innovators, startups, and industry leaders from across the globe.
-    </p>
-
-    <p>
-      Dive into AI, cybersecurity, Web3, and emerging technologies through
-      interactive workshops, powerful talks, and real-world networking.
-    </p>
-
-    <p>
-      Whether you're a student, professional, or entrepreneur — NovaSphere is
-      where the future of tech unfolds.
-    </p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
-
-    <div class="footer-left">
-      <h3>NovaSphere • Chennai</h3>
-      <p>April 1–2, 2026</p>
+    <!-- LEFT -->
+    <div class="nav-left" onclick="window.location.href='index.html'">
+      <h2 class="logo">NovaSphere</h2>
+      <span class="event-info">Apr 11-15 • Chennai</span>
     </div>
 
-    <div class="footer-center">
-      <p><strong>Email:</strong> info@novasphere.com</p>
-      <p><strong>Phone:</strong> +91 98765 43210</p>
-    </div>
-
-    <div class="footer-right">
-      <a href="index.html#venue">Venue</a>
+    <!-- CENTER -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="exhibition.html">Go to Virtual Exhibition</a>
       <a href="index.html#sponsors">Sponsors</a>
     </div>
 
-  </div>
-</footer>
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <a href="register.html" class="ticket-btn">REGISTER</a>
+    </div>
+
+  </nav>
+
+  <!-- HERO TEXT -->
+  <section class="about-hero">
+    <div class="about-text">
+      <h1>About NovaSphere</h1>
+      <p>
+        NovaSphere brings together the brightest minds in tech —
+        developers, founders, and innovators shaping the future.
+      </p>
+      <p>
+        From AI to cybersecurity, experience hands-on learning,
+        impactful talks, and real connections.
+      </p>
+    </div>
+  </section>
+
+  <!-- 🔥 VISUAL SECTION -->
+  <section class="about-visual">
+
+    <div class="circle top">
+      <img src="network.jpg">
+      <p class="label">Expand your network</p>
+    </div>
+
+    <div class="circle right">
+      <img src="skills.jpg">
+      <p class="label">Gain real-world skills</p>
+    </div>
+
+    <div class="circle bottom">
+      <img src="exp.jpg">
+      <p class="label">Learn from experts</p>
+    </div>
+
+    <!-- SHAPES -->
+    <div class="shape-wave"></div>
+    <div class="shape-star"></div>
+
+  </section>
+  <section class="about-speakers">
+
+    <h2>Featured Speakers</h2>
+
+    <div class="speaker-container">
+
+      <button class="arrow left" onclick="changeSpeaker(-1)">&#10094;</button>
+
+      <div class="speaker-card-horizontal">
+        <div class="speaker-img-container">
+          <img id="speakerImg" src="anshul.jpg" alt="Anshul">
+        </div>
+        <div class="speaker-details">
+          <h3 id="speakerName">Anshul</h3>
+          <p id="speakerRole">Cloud Infrastructure Architect</p>
+          <button class="view-more-btn" onclick="showSpeakerDetails()">View More</button>
+        </div>
+      </div>
+
+      <button class="arrow right" onclick="changeSpeaker(1)">&#10095;</button>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <h2>Ready to be part of NovaSphere?</h2>
+    <p>Join India’s fastest growing tech community.</p>
+
+    <a href="register.html" class="cta-btn">JOIN NOW</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <!-- LEFT -->
+      <div class="footer-left">
+        <h3>NovaSphere • Chennai</h3>
+        <p>Apr 11-15, 2026</p>
+      </div>
+
+      <!-- CENTER (CONTACT INFO) -->
+      <div class="footer-center">
+        <p><strong>Email:</strong> info@novasphere.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
+
+      <!-- RIGHT (LINKS) -->
+      <div class="footer-right">
+        <a href="index.html#venue">Venue</a>
+        <a href="about.html">About</a>
+        <a href="sponsor.html">Sponsors</a>
+      </div>
+
+    </div>
+
+  </footer>
 
 </body>
+
 </html>
