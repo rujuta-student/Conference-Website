@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Register - NovaSphere</title>
   <link rel="stylesheet" href="style.css">
@@ -26,7 +28,7 @@
 
     .price-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(255,94,0,0.6);
+      box-shadow: 0 0 30px rgba(255, 94, 0, 0.6);
       border: 1px solid #ff5e00;
     }
 
@@ -69,7 +71,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       justify-content: center;
       align-items: center;
     }
@@ -109,181 +111,210 @@
       font-size: 0.9rem;
       color: #aaa;
     }
-
   </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-left" onclick="window.location.href='index.html'">
-    <h2 class="logo">NovaSphere</h2>
-    <span class="event-info">April 1–2 • Chennai</span>
-  </div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
 
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="schedule.html">Schedule</a>
-  </div>
-</nav>
-
-<section class="register">
-
-  <h1>Choose Your Pass</h1>
-
-  <!-- 🔥 BIG CARDS -->
-  <div class="pricing">
-
-    <div class="price-card">
-      <h2>Student</h2>
-      <h3>$49</h3>
-      <ul>
-        <li>Meals included</li>
-        <li>Tutorial workshops</li>
-        <li>Networking access</li>
-      </ul>
-      <button onclick="openForm('Student Pass')">Register</button>
+    <!-- LEFT -->
+    <div class="nav-left" onclick="window.location.href='index.html'">
+      <h2 class="logo">NovaSphere</h2>
+      <span class="event-info">Apr 11-15 • Chennai</span>
     </div>
 
-    <div class="price-card">
-      <h2>Professor</h2>
-      <h3>$79</h3>
-      <ul>
-        <li>Meals included</li>
-        <li>Advanced workshops</li>
-        <li>Speaker sessions</li>
-      </ul>
-      <button onclick="openForm('Professor Pass')">Register</button>
+    <!-- CENTER -->
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="exhibition.html">Go to Virtual Exhibition</a>
+      <a href="index.html#sponsors">Sponsors</a>
     </div>
 
-    <div class="price-card">
-      <h2>Professional</h2>
-      <h3>$129</h3>
-      <ul>
-        <li>Company networking</li>
-        <li>Business meetups</li>
-        <li>Expo access</li>
-      </ul>
-      <button onclick="openForm('Professional Pass')">Register</button>
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <a href="register.html" class="ticket-btn">REGISTER</a>
     </div>
 
-  </div>
+  </nav>
 
-</section>
+  <section class="register">
 
-<div class="modal" id="formModal">
+    <h1>Choose Your Pass</h1>
 
-  <div class="modal-content">
+    <!-- 🔥 BIG CARDS -->
+    <div class="pricing">
 
-    <span class="close-btn" onclick="closeForm()">×</span>
-
-    <h2>Complete Registration</h2>
-    <p id="packageDisplay"></p>
-
-    <form class="modern-form" onsubmit="return validateForm()">
-
-      <input type="hidden" id="selectedPackage">
-
-      <!-- PERSONAL -->
-      <div class="form-section">
-        <h3>Personal Info</h3>
-
-        <div class="form-row">
-          <input type="text" id="name" placeholder="Full Name" required>
-          <input type="email" id="email" placeholder="Email" required>
-        </div>
-
-        <div class="form-row">
-          <input type="tel" placeholder="Phone Number" required>
-          <input type="date" required>
-        </div>
+      <div class="price-card">
+        <h2>Student</h2>
+        <h3>5000 Rs</h3>
+        <ul>
+          <li>Meals included</li>
+          <li>Tutorial workshops</li>
+          <li>Networking access</li>
+        </ul>
+        <button onclick="openForm('Student Pass')">Register</button>
       </div>
 
-      <!-- DETAILS -->
-      <div class="form-section">
-        <h3>Details</h3>
+      <div class="price-card">
+        <h2>Professor</h2>
+        <h3>7000 Rs</h3>
+        <ul>
+          <li>Meals included</li>
+          <li>Advanced workshops</li>
+          <li>Speaker sessions</li>
+        </ul>
+        <button onclick="openForm('Professor Pass')">Register</button>
+      </div>
 
-        <label>Gender</label>
-        <div class="radio-group">
-          <label><input type="radio" name="gender"> Male</label>
-          <label><input type="radio" name="gender"> Female</label>
-          <label><input type="radio" name="gender"> Other</label>
+      <div class="price-card">
+        <h2>Professional</h2>
+        <h3>8000 Rs</h3>
+        <ul>
+          <li>Company networking</li>
+          <li>Business meetups</li>
+          <li>Expo access</li>
+        </ul>
+        <button onclick="openForm('Professional Pass')">Register</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="modal" id="formModal">
+
+    <div class="modal-content">
+
+      <span class="close-btn" onclick="closeForm()">×</span>
+
+      <h2>Complete Registration</h2>
+      <p id="packageDisplay"></p>
+
+      <form class="modern-form" onsubmit="return validateForm()">
+
+        <input type="hidden" id="selectedPackage">
+
+        <!-- PERSONAL -->
+        <div class="form-section">
+          <h3>Personal Info</h3>
+
+          <div class="form-row">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+          </div>
+
+          <div class="form-row">
+            <input type="tel" placeholder="Phone Number" required>
+            <input type="date" required>
+          </div>
         </div>
 
-        <label>Experience Level</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
+        <!-- DETAILS -->
+        <div class="form-section">
+          <h3>Details</h3>
 
-      <!-- INTERESTS -->
-      <div class="form-section">
-        <h3>Interests</h3>
+          <label>Gender</label>
+          <div class="radio-group">
+            <label><input type="radio" name="gender"> Male</label>
+            <label><input type="radio" name="gender"> Female</label>
+            <label><input type="radio" name="gender"> Other</label>
+          </div>
 
-        <div class="checkbox-grid">
-          <label><input type="checkbox"> AI/ML</label>
-          <label><input type="checkbox"> Cybersecurity</label>
-          <label><input type="checkbox"> Web3</label>
-          <label><input type="checkbox"> Robotics</label>
+          <label>Experience Level</label>
+          <select>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
         </div>
-      </div>
 
-      <!-- EXTRA -->
-      <div class="form-section">
-        <h3>Extras</h3>
+        <!-- INTERESTS -->
+        <div class="form-section">
+          <h3>Interests</h3>
 
-        <input type="file">
-        <textarea placeholder="Why do you want to attend?"></textarea>
+          <div class="checkbox-grid">
+            <label><input type="checkbox"> AI/ML</label>
+            <label><input type="checkbox"> Cybersecurity</label>
+            <label><input type="checkbox"> Web3</label>
+            <label><input type="checkbox"> Robotics</label>
+          </div>
+        </div>
 
-        <label class="terms">
-          <input type="checkbox" required> I agree to terms & conditions
-        </label>
-      </div>
+        <!-- EXTRA -->
+        <div class="form-section">
+          <h3>Extras</h3>
 
-      <button class="btn submit-btn">Submit Registration</button>
+          <input type="file">
+          <textarea placeholder="Why do you want to attend?"></textarea>
 
-    </form>
+          <label class="terms">
+            <input type="checkbox" required> I agree to terms & conditions
+          </label>
+        </div>
 
-  </div>
-</div>
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-left">
-      <h3>NovaSphere</h3>
-      <p>April 1–2, 2026</p>
+        <button class="btn submit-btn">Submit Registration</button>
+
+      </form>
+
     </div>
   </div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
 
-<!-- 🔥 SCRIPT -->
-<script>
-function openForm(type) {
-  document.getElementById("formModal").style.display = "flex";
-  document.getElementById("selectedPackage").value = type;
-}
+    <div class="footer-container">
 
-function closeForm() {
-  document.getElementById("formModal").style.display = "none";
-}
+      <!-- LEFT -->
+      <div class="footer-left">
+        <h3>NovaSphere • Chennai</h3>
+        <p>Apr 11-15, 2026</p>
+      </div>
 
-function validateForm() {
-  let name = document.getElementById("name").value;
+      <!-- CENTER (CONTACT INFO) -->
+      <div class="footer-center">
+        <p><strong>Email:</strong> info@novasphere.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
 
-  if (name.length < 3) {
-    alert("Enter valid name");
-    return false;
-  }
+      <!-- RIGHT (LINKS) -->
+      <div class="footer-right">
+        <a href="index.html#venue">Venue</a>
+        <a href="about.html">About</a>
+        <a href="sponsor.html">Sponsors</a>
+      </div>
 
-  alert("Registered Successfully 🎉");
-  closeForm();
-  return false;
-}
-</script>
+    </div>
+
+  </footer>
+
+  <!-- 🔥 SCRIPT -->
+  <script>
+    function openForm(type) {
+      document.getElementById("formModal").style.display = "flex";
+      document.getElementById("selectedPackage").value = type;
+    }
+
+    function closeForm() {
+      document.getElementById("formModal").style.display = "none";
+    }
+
+    function validateForm() {
+      let name = document.getElementById("name").value;
+
+      if (name.length < 3) {
+        alert("Enter valid name");
+        return false;
+      }
+
+      alert("Registered Successfully 🎉");
+      closeForm();
+      return false;
+    }
+  </script>
 
 </body>
+
 </html>
